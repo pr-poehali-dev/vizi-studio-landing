@@ -141,23 +141,68 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="vz-hero-card-wrap reveal parallax" data-parallax="24">
+            <div className="vz-hero-card-wrap reveal parallax" data-delay="2" data-parallax="18">
               <div className="vz-hero-card">
                 <div className="vz-panel">
                   <div className="vz-panel-top">
                     <div>
-                      <div className="vz-tag">VIZI Growth System</div>
-                      <p style={{ marginTop: ".7rem", color: "var(--color-text-muted)", fontSize: "var(--text-sm)", maxWidth: "28ch" }}>Оффер, landing page, контент и автоответы — собраны в одну рабочую систему.</p>
+                      <div className="vz-tag">Система роста VIZI</div>
+                      <p className="vz-panel-text">Оффер, посадочная страница, контент и автоответы — собраны в одну рабочую систему.</p>
                     </div>
-                    <span className="vz-pill">Telegram + Site + CRM</span>
+                    <span className="vz-pill">Telegram + сайт + CRM</span>
                   </div>
+
                   <div className="vz-metric-grid">
                     <div className="vz-metric"><span>Ответ клиенту</span><strong>до 1 мин</strong></div>
                     <div className="vz-metric"><span>Потерянные лиды</span><strong>меньше</strong></div>
                   </div>
-                  <div className="vz-panel-line"><span>Landing page под оффер</span><strong>готов за 7 дней</strong></div>
+
+                  <div className="vz-panel-line"><span>Посадочная страница под оффер</span><strong>готова за 7 дней</strong></div>
                   <div className="vz-panel-line"><span>Контент на месяц</span><strong>20+ единиц</strong></div>
                   <div className="vz-panel-line"><span>Заявки и уведомления</span><strong>в одном окне</strong></div>
+
+                  <div className="vz-hero-stack">
+                    {/* Subpanel: flow */}
+                    <div className="vz-subpanel reveal" data-delay="3">
+                      <div className="vz-subpanel-head">
+                        <span className="vz-subpanel-title">Как работает система</span>
+                        <span className="vz-status-dot" aria-hidden="true" />
+                      </div>
+                      <div className="vz-flow-list">
+                        {[
+                          { n:"01", h:"Новая заявка", s:"Сайт / Telegram / форма", st:"Получено" },
+                          { n:"02", h:"Автоответ клиенту", s:"Мгновенный первый контакт", st:"Отправлен" },
+                          { n:"03", h:"Уведомление менеджеру", s:"Заявка не теряется в хаосе", st:"В работе" },
+                        ].map(({ n, h, s, st }) => (
+                          <div key={n} className="vz-flow-item">
+                            <div className="vz-flow-icon">{n}</div>
+                            <div className="vz-flow-text"><strong>{h}</strong><span>{s}</span></div>
+                            <div className="vz-flow-state">{st}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Subpanel: tags */}
+                    <div className="vz-subpanel reveal" data-delay="4">
+                      <div className="vz-subpanel-head">
+                        <span className="vz-subpanel-title">Для кого подходит</span>
+                        <span className="vz-pill">Бизнес и услуги</span>
+                      </div>
+                      <div className="vz-stack-tags">
+                        {["Стройка","Beauty","Локальные услуги","Франшизы"].map(t => (
+                          <span key={t} className="vz-pill">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Trust grid */}
+                    <div className="vz-trust-grid reveal" data-delay="4">
+                      <div className="vz-trust-mini"><strong>1 окно</strong><span>для входящих и уведомлений</span></div>
+                      <div className="vz-trust-mini"><strong>7–14 дней</strong><span>на первый запуск</span></div>
+                      <div className="vz-trust-mini"><strong>AI без шума</strong><span>только под бизнес-задачу</span></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
