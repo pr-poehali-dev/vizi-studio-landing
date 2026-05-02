@@ -149,6 +149,103 @@
     }
     </script>
 
+    <!-- ── JSON-LD: Services (GEO — для AI-поисковиков) ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Продуктовые пакеты VIZI Studio",
+      "description": "Готовые решения по AI-упаковке и автоматизации продаж для бизнеса Дальнего Востока",
+      "url": "https://vizi.studio/#offers",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Service",
+            "@id": "https://vizi.studio/#vizi-start",
+            "name": "VIZI Start",
+            "description": "Сайт, который собирает заявки. Для стройки, ремонта, локальных услуг, мебели и франшиз. Включает оффер, landing page, форму захвата и Telegram-уведомления.",
+            "provider": { "@id": "https://vizi.studio/#organization" },
+            "areaServed": "Дальний Восток России",
+            "offers": { "@type": "Offer", "price": "35000", "priceCurrency": "RUB", "description": "от 35 000 ₽" },
+            "serviceType": "Создание лендинга и сайта",
+            "audience": { "@type": "Audience", "audienceType": "Стройка, ремонт, локальные услуги, мебель, франшизы" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Service",
+            "@id": "https://vizi.studio/#vizi-beauty",
+            "name": "VIZI Beauty",
+            "description": "Онлайн-запись, автонапоминания и реактивация клиентов для барбершопов, салонов красоты, косметологии и стоматологии.",
+            "provider": { "@id": "https://vizi.studio/#organization" },
+            "areaServed": "Дальний Восток России",
+            "offers": { "@type": "Offer", "price": "45000", "priceCurrency": "RUB", "description": "от 45 000 ₽" },
+            "serviceType": "Автоматизация записи и возврата клиентов",
+            "audience": { "@type": "Audience", "audienceType": "Барбершопы, салоны красоты, косметология, стоматология, клиники" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Service",
+            "@id": "https://vizi.studio/#vizi-sales",
+            "name": "VIZI Sales",
+            "description": "Автоответы, квалификация заявок и прогрев лидов для недвижимости, стройки, логистики и B2B.",
+            "provider": { "@id": "https://vizi.studio/#organization" },
+            "areaServed": "Дальний Восток России",
+            "offers": { "@type": "Offer", "price": "60000", "priceCurrency": "RUB", "description": "от 60 000 ₽" },
+            "serviceType": "Автоматизация продаж и квалификация лидов",
+            "audience": { "@type": "Audience", "audienceType": "Недвижимость, стройка, логистика, B2B" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Service",
+            "@id": "https://vizi.studio/#vizi-media",
+            "name": "VIZI Media",
+            "description": "Контент-подписка: контент-план, тексты, визуалы, reels и рекламные креативы без штатного маркетолога.",
+            "provider": { "@id": "https://vizi.studio/#organization" },
+            "areaServed": "Дальний Восток России",
+            "offers": { "@type": "Offer", "price": "25000", "priceCurrency": "RUB", "description": "от 25 000 ₽/мес" },
+            "serviceType": "Контент-маркетинг и контент-подписка"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ── JSON-LD: Speakable + WebPage (для голосовых AI-ответов) ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://vizi.studio/",
+      "name": "VIZI Studio — AI-упаковка и автоматизация продаж",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".vz-eyebrow", "h1", ".vz-hero-lead", ".vz-proof-grid"]
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "AI-упаковка и автоматизация продаж для бизнеса Дальнего Востока"
+      },
+      "mentions": [
+        { "@type": "Place", "name": "Владивосток" },
+        { "@type": "Place", "name": "Хабаровск" },
+        { "@type": "Place", "name": "Дальний Восток" },
+        { "@type": "Place", "name": "Приморский край" }
+      ],
+      "mainEntity": { "@id": "https://vizi.studio/#organization" }
+    }
+    </script>
+
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS COMMENT! -->
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS COMMENT! -->
     <script src="https://cdn.poehali.dev/intertnal/js/pp-min-2.js"></script>
