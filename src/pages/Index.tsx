@@ -261,54 +261,72 @@ export default function Index() {
           <div className="vz-container">
             <div className="vz-section-head reveal">
               <span className="vz-eyebrow">О студии</span>
-              <h2>Мы не просто подрядчик — мы партнёр по росту</h2>
+              <h2>Команда из Дальнего Востока — для бизнеса Дальнего Востока</h2>
+              <p>VIZI Studio собирает системы роста для МСБ: сайт, контент, автоответы и автоматизация заявок — в одних руках, без хаоса между подрядчиками.</p>
             </div>
+
             <div className="vz-about-grid">
-              {/* Левая колонка — кто мы */}
-              <div className="vz-about-main reveal" data-delay="1">
-                <p className="vz-about-lead">VIZI Studio — команда из Дальнего Востока, которая помогает местному бизнесу выглядеть сильнее, работать быстрее и получать больше заявок. Мы не верим в «дизайн ради дизайна» и «AI ради хайпа» — только в результат, который можно измерить.</p>
-                <p className="vz-about-body">Работаем с МСБ: строители, салоны, клиники, сервисный бизнес, франшизы. Понимаем, что у владельца нет времени разбираться в инструментах — поэтому берём на себя всё: от стратегии до запуска и поддержки.</p>
-                <div className="vz-about-values">
-                  {[
-                    { icon: "⚡", title: "Скорость без потери качества", text: "Первое решение — за 7–14 дней. Не месяцами согласовываем, а быстро запускаем и итерируем." },
-                    { icon: "🎯", title: "Под реальность МСБ", text: "Не перегружаем технологиями. Только то, что работает на продажи в вашей нише." },
-                    { icon: "🔗", title: "Один подрядчик", text: "Стратегия, сайт, контент, автоматизация — в одних руках. Никакого хаоса между исполнителями." },
-                  ].map(({ icon, title, text }) => (
-                    <div key={title} className="vz-about-value">
-                      <span className="vz-about-icon">{icon}</span>
-                      <div><strong>{title}</strong><p>{text}</p></div>
-                    </div>
+              {/* 3 карточки принципов */}
+              {[
+                {
+                  label: "Подход",
+                  title: "Результат, а не технология",
+                  items: [
+                    "Не продаём AI ради хайпа — только под конкретную задачу",
+                    "Важен не стек, а то, что система работает на продажи",
+                    "Понятный результат: больше заявок, меньше потерь",
+                  ],
+                },
+                {
+                  label: "Формат работы",
+                  title: "Один подрядчик вместо четырёх",
+                  items: [
+                    "Стратегия, сайт, контент и автоматизация — в одних руках",
+                    "Запускаем первое решение за 7–14 дней",
+                    "Ведём проект дальше: обновляем, усиливаем, поддерживаем",
+                  ],
+                },
+                {
+                  label: "Для кого",
+                  title: "Под реальность МСБ",
+                  items: [
+                    "Стройка, ремонт, салоны, клиники, франшизы, локальные услуги",
+                    "Работаем по всему Дальнему Востоку удалённо",
+                    "Понимаем специфику местного рынка и аудитории",
+                  ],
+                },
+              ].map(({ label, title, items }, i) => (
+                <article key={label} className="vz-card reveal" data-delay={String(i + 1)}>
+                  <span className="vz-label">{label}</span>
+                  <h3>{title}</h3>
+                  <ul className="vz-list">
+                    {items.map(item => <li key={item}>{item}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+
+            {/* Нижняя полоса — регионы + факты */}
+            <div className="vz-about-bottom reveal" data-delay="2">
+              <div className="vz-about-bottom-left">
+                <span className="vz-label">Работаем в регионах</span>
+                <div className="vz-stack-tags" style={{ marginTop: ".6rem" }}>
+                  {["Владивосток","Хабаровск","Южно-Сахалинск","Находка","Уссурийск","Весь ДВ"].map(r => (
+                    <span key={r} className="vz-pill">{r}</span>
                   ))}
                 </div>
               </div>
-
-              {/* Правая колонка — факты + регион */}
-              <div className="vz-about-aside">
-                <div className="vz-about-stats reveal" data-delay="2">
-                  {[
-                    { num: "Дальний Восток", label: "наш рынок и наша экспертиза" },
-                    { num: "МСБ", label: "строители, салоны, клиники, услуги, B2B" },
-                    { num: "7–14 дней", label: "от старта до первого результата" },
-                    { num: "1 окно", label: "всё — стратегия, сайт, контент, автоматизация" },
-                  ].map(({ num, label }) => (
-                    <div key={num} className="vz-about-stat">
-                      <strong>{num}</strong>
-                      <span>{label}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="vz-about-region reveal" data-delay="3">
-                  <span className="vz-label">Работаем в регионах</span>
-                  <div className="vz-stack-tags" style={{ marginTop: ".6rem" }}>
-                    {["Владивосток","Хабаровск","Южно-Сахалинск","Находка","Уссурийск","Весь ДВ"].map(r => (
-                      <span key={r} className="vz-pill">{r}</span>
-                    ))}
+              <div className="vz-about-bottom-stats">
+                {[
+                  { num: "7–14 дней", label: "на первый запуск" },
+                  { num: "24 часа", label: "на первичный разбор" },
+                  { num: "1 окно", label: "для всех входящих" },
+                ].map(({ num, label }) => (
+                  <div key={num} className="vz-about-stat">
+                    <strong>{num}</strong>
+                    <span>{label}</span>
                   </div>
-                  <p style={{ marginTop: "1rem", fontSize: "var(--text-sm)", color: "var(--color-text-muted)" }}>
-                    Работаем удалённо по всему Дальнему Востоку. Понимаем специфику местного рынка, конкуренции и аудитории.
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
