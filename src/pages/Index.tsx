@@ -1,5 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 
+/* ── Modal ── */
+function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", handler); document.body.style.overflow = ""; };
+  }, [onClose]);
+  return (
+    <div className="vz-modal-backdrop" onClick={onClose}>
+      <div className="vz-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+        <div className="vz-modal-header">
+          <h3 className="vz-modal-title">{title}</h3>
+          <button className="vz-modal-close" onClick={onClose} aria-label="Закрыть">✕</button>
+        </div>
+        <div className="vz-modal-body">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Theme ── */
 function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">(() =>
@@ -85,6 +106,8 @@ export default function Index() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
+  const [agreed, setAgreed] = useState(false);
+  const [modal, setModal] = useState<"consent" | "privacy" | null>(null);
 
   return (
     <div style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
@@ -480,8 +503,26 @@ export default function Index() {
                     <textarea id="task" className="vz-textarea" placeholder="Например: Строительная компания. Хотим усилить сайт и перестать терять входящие заявки."
                       value={formData.task} onChange={e => setFormData(f => ({ ...f, task: e.target.value }))} />
                   </div>
+                  <label className="vz-consent-row">
+                    <input
+                      type="checkbox"
+                      className="vz-consent-check"
+                      checked={agreed}
+                      onChange={e => setAgreed(e.target.checked)}
+                    />
+                    <span className="vz-consent-text">
+                      Я согласен(а) на{" "}
+                      <button type="button" className="vz-consent-link" onClick={() => setModal("consent")}>
+                        обработку персональных данных
+                      </button>{" "}
+                      и ознакомлен(а) с{" "}
+                      <button type="button" className="vz-consent-link" onClick={() => setModal("privacy")}>
+                        политикой конфиденциальности
+                      </button>
+                    </span>
+                  </label>
                   {sendError && <p style={{ color: "var(--color-danger, #f55)", fontSize: "var(--text-sm)" }}>{sendError}</p>}
-                  <button className="vz-btn vz-btn-primary" type="submit" disabled={sending}>
+                  <button className="vz-btn vz-btn-primary" type="submit" disabled={sending || !agreed}>
                     {sending ? "Отправляем..." : "Получить разбор за 24 часа"}
                   </button>
                 </form>
@@ -499,6 +540,30 @@ export default function Index() {
           <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)" }}>© {new Date().getFullYear()} VIZI Studio</p>
         </div>
       </footer>
+
+      {/* ── MODALS ── */}
+      {modal === "consent" && (
+        <Modal title="Согласие на обработку персональных данных" onClose={() => setModal(null)}>
+          <p>Настоящим я, действуя свободно, своей волей и в своём интересе, даю согласие <strong>VIZI Studio</strong> (далее — Оператор) на обработку следующих персональных данных: контактная информация (ссылки на сайт, Telegram, социальные сети), а также любые сведения, добровольно указанные в форме обратной связи.</p>
+          <p>Цель обработки: рассмотрение заявки, связь с целью предоставления услуг, подготовка коммерческого предложения.</p>
+          <p>Способы обработки: сбор, запись, систематизация, хранение, уточнение, использование, передача (при необходимости), удаление. Обработка осуществляется с использованием средств автоматизации.</p>
+          <p>Срок хранения: до достижения целей обработки или до отзыва согласия.</p>
+          <p>Согласие может быть отозвано в любой момент путём направления письменного запроса по электронной почте Оператора. Отзыв согласия не влияет на законность обработки, осуществлённой до его отзыва.</p>
+          <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)" }}>Нажимая кнопку «Получить разбор за 24 часа» и установив галочку, вы подтверждаете своё согласие с указанными условиями.</p>
+        </Modal>
+      )}
+      {modal === "privacy" && (
+        <Modal title="Политика конфиденциальности" onClose={() => setModal(null)}>
+          <p><strong>1. Общие положения</strong><br/>Настоящая политика конфиденциальности (далее — Политика) описывает порядок сбора, хранения и использования персональных данных пользователей сайта VIZI Studio.</p>
+          <p><strong>2. Какие данные мы собираем</strong><br/>Мы собираем только те данные, которые вы добровольно предоставляете через форму обратной связи: контактная информация (сайт, Telegram, соцсети) и описание задачи.</p>
+          <p><strong>3. Как мы используем данные</strong><br/>Данные используются исключительно для связи с вами в целях подготовки предложения и оказания услуг. Мы не передаём ваши данные третьим лицам без вашего согласия, за исключением случаев, предусмотренных законодательством Российской Федерации.</p>
+          <p><strong>4. Хранение данных</strong><br/>Данные хранятся на защищённых серверах. Срок хранения — до достижения целей обработки либо до получения запроса об удалении.</p>
+          <p><strong>5. Файлы cookie</strong><br/>Сайт может использовать технические cookie-файлы для корректной работы. Данные файлы не содержат персональной информации и не передаются третьим лицам.</p>
+          <p><strong>6. Ваши права</strong><br/>Вы вправе в любой момент запросить доступ к своим данным, их исправление или удаление, направив запрос на электронную почту Оператора.</p>
+          <p><strong>7. Изменения политики</strong><br/>Мы оставляем за собой право обновлять настоящую Политику. Актуальная версия всегда размещена на сайте.</p>
+          <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)" }}>Дата последнего обновления: {new Date().getFullYear()} г.</p>
+        </Modal>
+      )}
     </div>
   );
 }
