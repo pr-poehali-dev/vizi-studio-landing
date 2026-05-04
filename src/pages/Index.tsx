@@ -537,7 +537,11 @@ export default function Index() {
       <footer className="vz-footer">
         <div className="vz-container vz-footer-row">
           <p>VIZI Studio — AI-упаковка, сайты, контент и автоматизация продаж для бизнеса Дальнего Востока.</p>
-          <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)" }}>© {new Date().getFullYear()} VIZI Studio</p>
+          <div className="vz-footer-legal">
+            <button className="vz-footer-link" onClick={() => setModal("consent")}>Обработка персональных данных</button>
+            <button className="vz-footer-link" onClick={() => setModal("privacy")}>Политика конфиденциальности</button>
+            <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)", margin: 0 }}>© {new Date().getFullYear()} VIZI Studio</p>
+          </div>
         </div>
       </footer>
 
