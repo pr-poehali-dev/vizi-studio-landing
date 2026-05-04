@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Missing contact returns 400",
+      "method": "POST",
+      "path": "/",
+      "body": {"task": "Тест"},
+      "expectedStatus": 400,
+      "expectedBody": {"error": "Поле contact обязательно"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
