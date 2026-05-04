@@ -83,6 +83,8 @@ export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ contact: "", task: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
 
   return (
     <div style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
@@ -450,7 +452,24 @@ export default function Index() {
                   <p style={{ color: "var(--color-text-muted)" }}>Свяжемся с вами в течение 24 часов.</p>
                 </div>
               ) : (
-                <form className="vz-form-grid" onSubmit={e => { e.preventDefault(); setSubmitted(true); }}>
+                <form className="vz-form-grid" onSubmit={async e => {
+                  e.preventDefault();
+                  setSending(true);
+                  setSendError("");
+                  try {
+                    const res = await fetch("https://functions.poehali.dev/a9a50ff3-4026-4b30-825d-c177d3127a66", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(formData),
+                    });
+                    if (!res.ok) throw new Error("server");
+                    setSubmitted(true);
+                  } catch {
+                    setSendError("Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.");
+                  } finally {
+                    setSending(false);
+                  }
+                }}>
                   <div>
                     <label htmlFor="contact">Ссылка на сайт / Telegram / соцсети</label>
                     <input id="contact" className="vz-input" type="text" placeholder="Например: vizistudio.ru или t.me/yourbrand"
@@ -461,7 +480,10 @@ export default function Index() {
                     <textarea id="task" className="vz-textarea" placeholder="Например: Строительная компания. Хотим усилить сайт и перестать терять входящие заявки."
                       value={formData.task} onChange={e => setFormData(f => ({ ...f, task: e.target.value }))} />
                   </div>
-                  <button className="vz-btn vz-btn-primary" type="submit">Получить разбор за 24 часа</button>
+                  {sendError && <p style={{ color: "var(--color-danger, #f55)", fontSize: "var(--text-sm)" }}>{sendError}</p>}
+                  <button className="vz-btn vz-btn-primary" type="submit" disabled={sending}>
+                    {sending ? "Отправляем..." : "Получить разбор за 24 часа"}
+                  </button>
                 </form>
               )}
             </div>
