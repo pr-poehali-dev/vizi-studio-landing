@@ -23,9 +23,7 @@ function Modal({ title, onClose, children }: { title: string; onClose: () => voi
 
 /* ── Theme ── */
 function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">(() =>
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-  );
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
