@@ -572,6 +572,32 @@ export default function Index() {
           <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)" }}>Дата последнего обновления: {new Date().getFullYear()} г.</p>
         </Modal>
       )}
+
+      <a
+        href="https://t.me/Keranos_AI"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Написать в Telegram"
+        style={{
+          position: "fixed",
+          bottom: "1.5rem",
+          right: "1.5rem",
+          zIndex: 100,
+          width: "52px",
+          height: "52px",
+          borderRadius: "50%",
+          background: "#2AABEE",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 4px 20px rgba(42,171,238,0.45)",
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.1)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 6px 28px rgba(42,171,238,0.6)"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 4px 20px rgba(42,171,238,0.45)"; }}
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.617l-2.95-.924c-.64-.203-.658-.64.136-.954l11.57-4.461c.537-.194 1.006.131.968.943z"/></svg>
+      </a>
     </div>
   );
 }
