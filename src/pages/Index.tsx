@@ -247,6 +247,13 @@ export default function Index() {
           </div>
         </div>
 
+        {/* ── SEO TEXT ── */}
+        <div className="vz-container" style={{ paddingBlock: "2rem" }}>
+          <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-faint)", lineHeight: 1.7, maxWidth: "72ch" }}>
+            VIZI Studio помогает бизнесу Владивостока и Дальнего Востока получать больше заявок за счёт сильного сайта, понятного оффера, контента и автоматизации коммуникаций. Мы внедряем Telegram-воронки, автоответы, CRM-логику и AI-решения для малого и среднего бизнеса: от стройки и салонов красоты в Приморском крае до гостиниц, кафе, туризма и локальных сервисов Хабаровска и Южно-Сахалинска.
+          </p>
+        </div>
+
         {/* ── PROBLEMS ── */}
         <section className="vz-section" id="problems">
           <div className="vz-container">
