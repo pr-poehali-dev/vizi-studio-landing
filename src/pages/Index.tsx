@@ -107,6 +107,24 @@ export default function Index() {
   const [agreed, setAgreed] = useState(false);
   const [modal, setModal] = useState<"consent" | "privacy" | null>(null);
 
+  const [promptVisible, setPromptVisible] = useState(false);
+  const [promptDismissed, setPromptDismissed] = useState(false);
+  const [auditModal, setAuditModal] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (!promptDismissed) setPromptVisible(true);
+    }, 60000);
+    return () => clearTimeout(t);
+  }, [promptDismissed]);
+
+  const dismissPrompt = () => { setPromptVisible(false); setPromptDismissed(true); };
+  const openAuditModal = () => { setPromptVisible(false); setAuditModal(true); };
+  const scrollToCta = () => {
+    setAuditModal(false);
+    document.getElementById("cta")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
       <a style={{ position: "absolute", left: "-999px" }} href="#content">Перейти к контенту</a>
@@ -591,6 +609,130 @@ export default function Index() {
           <p><strong>6. Ваши права</strong><br/>Вы вправе в любой момент запросить доступ к своим данным, их исправление или удаление, направив запрос на электронную почту Оператора.</p>
           <p><strong>7. Изменения политики</strong><br/>Мы оставляем за собой право обновлять настоящую Политику. Актуальная версия всегда размещена на сайте.</p>
           <p style={{ color: "var(--color-text-faint)", fontSize: "var(--text-xs)" }}>Дата последнего обновления: {new Date().getFullYear()} г.</p>
+        </Modal>
+      )}
+
+      {/* ── FLOATING PROMPT ── */}
+      {promptVisible && (
+        <div
+          role="complementary"
+          aria-label="Предложение разбора"
+          style={{
+            position: "fixed",
+            bottom: "5.5rem",
+            right: "1.5rem",
+            zIndex: 200,
+            width: "min(300px, calc(100vw - 3rem))",
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "var(--radius-xl)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+            padding: "1.1rem 1.25rem 1rem",
+            animation: "vz-prompt-in 0.35s var(--ease-premium) both",
+          }}
+        >
+          <button
+            onClick={dismissPrompt}
+            aria-label="Закрыть"
+            style={{
+              position: "absolute",
+              top: "0.6rem",
+              right: "0.75rem",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "var(--color-text-faint)",
+              fontSize: "1rem",
+              lineHeight: 1,
+              padding: "0.15rem",
+              borderRadius: "4px",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-text)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-faint)")}
+          >✕</button>
+          <p style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 600,
+            fontSize: "var(--text-sm)",
+            lineHeight: 1.4,
+            marginBottom: "0.85rem",
+            paddingRight: "1.25rem",
+            color: "var(--color-text)",
+          }}>
+            Показать, где сайт теряет заявки?
+          </p>
+          <button
+            onClick={openAuditModal}
+            style={{
+              width: "100%",
+              padding: "0.6rem 1rem",
+              background: "var(--color-primary)",
+              color: "#fff",
+              border: "none",
+              borderRadius: "var(--radius-lg)",
+              fontFamily: "var(--font-display)",
+              fontWeight: 600,
+              fontSize: "var(--text-sm)",
+              cursor: "pointer",
+              transition: "opacity 0.2s, transform 0.2s",
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.88"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; (e.currentTarget as HTMLButtonElement).style.transform = "none"; }}
+          >
+            Да, показать
+          </button>
+        </div>
+      )}
+
+      {/* ── AUDIT MODAL ── */}
+      {auditModal && (
+        <Modal title="Не уверены, с чего начать?" onClose={() => setAuditModal(false)}>
+          <p style={{ color: "var(--color-text-muted)", lineHeight: 1.65, marginBottom: "1.5rem" }}>
+            Покажем за 24 часа, где сайт и входящие теряют заявки — и что можно быстро автоматизировать.
+          </p>
+          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            <button
+              onClick={scrollToCta}
+              style={{
+                flex: "1 1 auto",
+                padding: "0.7rem 1.25rem",
+                background: "var(--color-primary)",
+                color: "#fff",
+                border: "none",
+                borderRadius: "var(--radius-lg)",
+                fontFamily: "var(--font-display)",
+                fontWeight: 600,
+                fontSize: "var(--text-sm)",
+                cursor: "pointer",
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = "0.88")}
+              onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = "1")}
+            >
+              Получить разбор
+            </button>
+            <button
+              onClick={() => setAuditModal(false)}
+              style={{
+                flex: "0 0 auto",
+                padding: "0.7rem 1.25rem",
+                background: "transparent",
+                color: "var(--color-text-muted)",
+                border: "1px solid var(--color-border)",
+                borderRadius: "var(--radius-lg)",
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                fontSize: "var(--text-sm)",
+                cursor: "pointer",
+                transition: "border-color 0.2s, color 0.2s",
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-text-muted)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--color-text)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-border)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--color-text-muted)"; }}
+            >
+              Позже
+            </button>
+          </div>
         </Modal>
       )}
 
