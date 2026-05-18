@@ -523,6 +523,10 @@ export default function Index() {
                   <button className="vz-btn vz-btn-primary" type="submit" disabled={sending || !agreed}>
                     {sending ? "Отправляем..." : "Получить разбор за 24 часа"}
                   </button>
+                  <p style={{ textAlign: "center", color: "var(--color-text-faint)", fontSize: "var(--text-sm)", margin: "0.25rem 0" }}>или</p>
+                  <a className="vz-btn vz-btn-secondary" href="https://t.me/vizistudio" target="_blank" rel="noopener noreferrer">
+                    Написать в Telegram
+                  </a>
                 </form>
               )}
             </div>
