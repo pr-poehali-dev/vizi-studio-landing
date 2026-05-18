@@ -150,7 +150,11 @@ export default function Index() {
           <div className="vz-container vz-hero-grid">
             <div className="hero-copy reveal" data-delay="1">
               <span className="vz-eyebrow">AI-упаковка и автоматизация продаж для бизнеса Дальнего Востока</span>
-              <h1>Ваш бизнес теряет заявки прямо сейчас. Мы это исправим за 7–14 дней.</h1>
+              <h1>
+                <span style={{ display: "block" }}>Больше заявок.</span>
+                <span style={{ display: "block" }}>Меньше хаоса.</span>
+                <span style={{ display: "block", color: "var(--color-primary)" }}>За 14 дней.</span>
+              </h1>
               <p className="vz-hero-lead">VIZI Studio — одна команда вместо сайтостроителя, smm-щика и автоматизатора по отдельности. Сайт, контент, Telegram-воронка и автоответы — собираем под ключ за 7–14 дней.</p>
               <div className="vz-hero-actions">
                 <a className="vz-btn vz-btn-primary" href="#cta">Получить бесплатный разбор</a>
