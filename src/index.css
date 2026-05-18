@@ -1206,6 +1206,62 @@ label {
   }
 }
 
+/* ── Mobile-first optimizations ── */
+@media (max-width: 759px) {
+  .vz-hero {
+    padding: clamp(2.5rem, 8vw, 4rem) 0 clamp(2rem, 5vw, 3rem);
+  }
+  h1 {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+  .vz-hero-lead {
+    font-size: var(--text-base);
+    margin-top: 1rem;
+  }
+  .vz-hero-actions {
+    flex-direction: column;
+    margin-top: 1.5rem;
+  }
+  .vz-hero-actions .vz-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .vz-hero-card-wrap {
+    display: none;
+  }
+  .vz-proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .vz-section {
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+  }
+  .vz-section-head h2 {
+    font-size: var(--text-xl);
+    max-width: 100%;
+  }
+  .vz-quote-band {
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+  }
+  .vz-quote-band h2 {
+    font-size: var(--text-xl);
+    max-width: 100%;
+  }
+  .vz-cta-card {
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+  }
+  .vz-cta-card h2 {
+    font-size: var(--text-xl);
+    max-width: 100%;
+  }
+  .vz-about-bottom-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (min-width: 760px) {
   .vz-grid-2 {
     grid-template-columns: repeat(2, 1fr);
