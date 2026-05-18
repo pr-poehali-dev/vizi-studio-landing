@@ -237,7 +237,7 @@ export default function Index() {
         <div style={{ borderTop: "1px solid var(--color-border)", borderBottom: "1px solid var(--color-border)", background: "var(--color-surface)", paddingBlock: "1.5rem" }}>
           <div className="vz-container" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.75rem" }}>
             <span style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", whiteSpace: "nowrap" }}>Работаем с бизнесом из:</span>
-            {["Стройка и ремонт","Beauty и косметология","Стоматологии и клиники","Локальные услуги","Франшизы и сети","Логистика и доставка","Недвижимость"].map(tag => (
+            {["Стройка и ремонт","Beauty и косметология","Стоматологии и клиники","Локальные услуги","Франшизы и сети","Логистика и доставка","Недвижимость","Кафе и бары","Туризм и экскурсии","Гостиницы и отели"].map(tag => (
               <span key={tag} className="vz-pill">{tag}</span>
             ))}
           </div>
