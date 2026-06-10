@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://vizi.studio/</loc>
-    <lastmod>2026-05-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://vizi.studio/"/>
+    <image:image>
+      <image:loc>https://cdn.poehali.dev/projects/e97d86ff-5150-43d7-9aaa-a57be6e709db/bucket/65d0d7c8-cd58-47a5-96e8-42788df3bd8f.jpg</image:loc>
+      <image:title>VIZI Studio — Создание сайтов и AI-автоматизация продаж во Владивостоке</image:title>
+    </image:image>
   </url>
 </urlset>
