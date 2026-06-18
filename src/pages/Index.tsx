@@ -533,6 +533,13 @@ export default function Index() {
                     });
                     if (!res.ok) throw new Error("server");
                     setSubmitted(true);
+                    const tmr = (window as unknown as { _tmr?: { push: (o: object) => void } })._tmr;
+                    if (tmr) {
+                      tmr.push({ id: "30991757", type: "reachGoal", goal: "lead_submit" });
+                    }
+                    if (typeof window !== "undefined" && "ym" in window) {
+                      (window as unknown as { ym: (...a: unknown[]) => void }).ym(101026698, "reachGoal", "lead_submit");
+                    }
                   } catch {
                     setSendError("Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.");
                   } finally {
