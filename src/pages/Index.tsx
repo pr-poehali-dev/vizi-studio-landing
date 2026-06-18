@@ -535,7 +535,7 @@ export default function Index() {
                     setSubmitted(true);
                     const tmr = (window as unknown as { _tmr?: { push: (o: object) => void } })._tmr;
                     if (tmr) {
-                      tmr.push({ id: "30991757", type: "reachGoal", goal: "lead_submit" });
+                      tmr.push({ id: "3774091", type: "reachGoal", goal: "lead_submit" });
                     }
                     if (typeof window !== "undefined" && "ym" in window) {
                       const ym = (window as unknown as { ym: (...a: unknown[]) => void }).ym;
