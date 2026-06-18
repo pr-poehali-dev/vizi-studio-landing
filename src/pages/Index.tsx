@@ -539,8 +539,8 @@ export default function Index() {
                     }
                     if (typeof window !== "undefined" && "ym" in window) {
                       const ym = (window as unknown as { ym: (...a: unknown[]) => void }).ym;
-                      ym(101026698, "reachGoal", "lead_submit");
-                      ym(105943341, "reachGoal", "lead_submit");
+                      ym(101026698, "reachGoal", "request-form-submit");
+                      ym(105943341, "reachGoal", "request-form-submit");
                     }
                   } catch {
                     setSendError("Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.");
