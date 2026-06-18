@@ -7,7 +7,7 @@
       "expectedStatus": 200
     },
     {
-      "name": "Missing contact returns 400",
+      "name": "Missing messenger returns 400",
       "method": "POST",
       "path": "/",
       "body": {"task": "test"},

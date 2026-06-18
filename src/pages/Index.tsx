@@ -100,7 +100,7 @@ export default function Index() {
   const headerRef = useRef<HTMLElement>(null);
   useMotion(headerRef);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ contact: "", task: "" });
+  const [formData, setFormData] = useState({ messenger: "", contact: "", task: "" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
@@ -515,6 +515,14 @@ export default function Index() {
               ) : (
                 <form className="vz-form-grid" onSubmit={async e => {
                   e.preventDefault();
+                  if (!formData.messenger.trim()) {
+                    setSendError("Укажите Telegram или телефон, чтобы мы могли с вами связаться.");
+                    return;
+                  }
+                  if (!agreed) {
+                    setSendError("Поставьте галочку согласия на обработку данных.");
+                    return;
+                  }
                   setSending(true);
                   setSendError("");
                   try {
@@ -532,12 +540,17 @@ export default function Index() {
                   }
                 }}>
                   <div>
-                    <label htmlFor="contact">Ссылка на сайт / Telegram / соцсети</label>
+                    <label htmlFor="messenger">Ваш Telegram или телефон *</label>
+                    <input id="messenger" className="vz-input" type="text" required placeholder="@username или +7 xxx xxx xx xx"
+                      value={formData.messenger} onChange={e => setFormData(f => ({ ...f, messenger: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label htmlFor="contact">Ссылка на сайт / соцсети (необязательно)</label>
                     <input id="contact" className="vz-input" type="text" placeholder="Например: vizistudio.ru или t.me/yourbrand"
                       value={formData.contact} onChange={e => setFormData(f => ({ ...f, contact: e.target.value }))} />
                   </div>
                   <div>
-                    <label htmlFor="task">Кратко: чем занимаетесь и что хотите улучшить</label>
+                    <label htmlFor="task">Кратко: чем занимаетесь и что хотите улучшить (необязательно)</label>
                     <textarea id="task" className="vz-textarea" placeholder="Например: Строительная компания. Хотим усилить сайт и перестать терять входящие заявки."
                       value={formData.task} onChange={e => setFormData(f => ({ ...f, task: e.target.value }))} />
                   </div>
@@ -560,7 +573,7 @@ export default function Index() {
                     </span>
                   </label>
                   {sendError && <p style={{ color: "var(--color-danger, #f55)", fontSize: "var(--text-sm)" }}>{sendError}</p>}
-                  <button className="vz-btn vz-btn-primary" type="submit" disabled={sending || !agreed}>
+                  <button className="vz-btn vz-btn-primary" type="submit" disabled={sending}>
                     {sending ? "Отправляем..." : "Получить разбор за 24 часа"}
                   </button>
                   <p style={{ textAlign: "center", color: "var(--color-text-faint)", fontSize: "var(--text-sm)", margin: "0.25rem 0" }}>или</p>

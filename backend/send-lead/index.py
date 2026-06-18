@@ -18,14 +18,15 @@ def handler(event: dict, context) -> dict:
         return {"statusCode": 200, "headers": headers, "body": ""}
 
     body = json.loads(event.get("body") or "{}")
+    messenger = body.get("messenger", "").strip()
     contact = body.get("contact", "").strip()
     task = body.get("task", "").strip()
 
-    if not contact:
+    if not messenger:
         return {
             "statusCode": 400,
             "headers": headers,
-            "body": {"error": "Поле contact обязательно"},
+            "body": json.dumps({"error": "Поле messenger обязательно"}),
         }
 
     smtp_host = os.environ.get("SMTP_HOST", "smtp.mail.ru")
@@ -41,7 +42,8 @@ def handler(event: dict, context) -> dict:
 
     text_body = f"""Новая заявка с сайта VIZI Studio
 
-Контакт: {contact}
+Telegram / телефон: {messenger}
+Сайт / соцсети: {contact or '—'}
 
 Задача / описание:
 {task or '—'}
@@ -54,8 +56,12 @@ def handler(event: dict, context) -> dict:
   <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
   <table style="width:100%; border-collapse: collapse;">
     <tr>
-      <td style="padding: 8px 0; color: #888; width: 120px; vertical-align: top;">Контакт</td>
-      <td style="padding: 8px 0; font-weight: 600;">{contact}</td>
+      <td style="padding: 8px 0; color: #888; width: 140px; vertical-align: top;">Telegram / телефон</td>
+      <td style="padding: 8px 0; font-weight: 600;">{messenger}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px 0; color: #888; vertical-align: top;">Сайт / соцсети</td>
+      <td style="padding: 8px 0;">{contact or '—'}</td>
     </tr>
     <tr>
       <td style="padding: 8px 0; color: #888; vertical-align: top;">Задача</td>
