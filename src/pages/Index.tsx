@@ -538,7 +538,9 @@ export default function Index() {
                       tmr.push({ id: "30991757", type: "reachGoal", goal: "lead_submit" });
                     }
                     if (typeof window !== "undefined" && "ym" in window) {
-                      (window as unknown as { ym: (...a: unknown[]) => void }).ym(101026698, "reachGoal", "lead_submit");
+                      const ym = (window as unknown as { ym: (...a: unknown[]) => void }).ym;
+                      ym(101026698, "reachGoal", "lead_submit");
+                      ym(105943341, "reachGoal", "lead_submit");
                     }
                   } catch {
                     setSendError("Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.");
